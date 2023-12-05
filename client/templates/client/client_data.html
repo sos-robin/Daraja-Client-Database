@@ -1,0 +1,240 @@
+
+{% extends 'client/base.html'%}
+
+{% include "client/navbar.html" %}
+
+
+{%block content%}
+
+    <style>
+        
+body{margin-top:20px;
+background-color:#f2f6fc;
+color:#69707a;
+}
+.img-account-profile {
+    height: 10rem;
+}
+.rounded-circle {
+    border-radius: 50% !important;
+}
+.card {
+    box-shadow: 0 0.15rem 1.75rem 0 rgb(33 40 50 / 15%);
+}
+.card .card-header {
+    font-weight: 500;
+}
+.card-header:first-child {
+    border-radius: 0.35rem 0.35rem 0 0;
+}
+.card-header {
+    padding: 1rem 1.35rem;
+    margin-bottom: 0;
+    background-color: rgba(33, 40, 50, 0.03);
+    border-bottom: 1px solid rgba(33, 40, 50, 0.125);
+}
+.form-control, .dataTable-input {
+    display: block;
+    width: 100%;
+    padding: 0.875rem 1.125rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1;
+    color: #69707a;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #c5ccd6;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0.35rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.nav-borders .nav-link:hover {
+  color: #0061f2;
+  border-bottom-color: #0061f2;
+}
+.nav-borders .nav-link {
+    color: #69707a;
+    border-bottom-width: 0.125rem;
+    border-bottom-style: solid;
+    border-bottom-color: transparent;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+    
+    </style>
+</head>    
+{% include "client/header.html" %}
+                
+                <hr class="mt-0 mb-4">
+                <div class="row">
+                    <div class="col-xl-3">
+                        <!-- Profile picture card-->
+                        <div class="card mb-4 mb-xl-0">
+                            <div class="card-header">Profile Picture</div>
+                            <div class="card-body text-center">
+                                <!-- Profile picture image-->
+                                <img class="img-account-profile rounded-circle mb-2" src="{{form}}" alt="">
+                                <!-- Profile picture help block-->
+                                <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
+                                <!-- Profile picture upload button-->
+                                <form action="" method="POST" enctype="multipart/form-data">
+                                  {% csrf_token %}
+                                  {{form.as_p}}
+                                  <input type="file" name="image" accept="image/*">
+                                  <input class="btn btn-primary" type="submit" value="Upload new image">
+                                  <a href="{% url 'upload_profile_picture'%}"><button type="submit">Upload new Image</button>
+                                </form>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-9">
+                        <!-- Account details card-->
+                        <div class="card mb-4">
+                            <div class="card-header">Personal Information</div>
+                            <div class="card-body">
+                                    <div class="row gx-3 mb-1">
+                                        
+                                        <div class="col-md-6">
+                                            <label class="small text-success " for="inputFirstName">First name</label>
+                                            <p class="form-control" id="inputFirstNameDisplay">{{client.name}}</p>
+                                        </div>
+                                        
+                                        <div class="col-md-6">
+                                            <label class="small text-success" for="inputLastName">Last name</label>
+                                            <p class="form-control" id="inputLastName">{{client.name}}</p>
+                                        </div>
+                                    </div>
+                                    <!-- Form Row        -->
+                                    <div class="row gx-3 mb-1">
+                                        <!-- Form Group (organization name)-->
+                                        <div class="col-md-6">
+                                            <label class="small mb-1 text-success" for="inputOrgName">Company name</label>
+                                            <p class="form-control">{{client.company_name}}</p>
+                                        </div>
+                                        <!-- Form Group (location)-->
+                                        <div class="col-md-6">
+                                            <label class="small mb-1 text-success" for="inputLocation">Country</label>
+                                            <p class="form-control">{{client.location}}</p>
+                                        </div>
+                                    </div>
+                                    <!-- Form Group (email address)-->
+                                    <div class="row gx-3 mb-1">
+                                        <!-- Form Group (organization name)-->
+                                        <div class="col-md-6">
+                                            <label class="small mb-1 text-success" for="inputOrgName">Job Title</label>
+                                            <p class="form-control">{{client.job_title}}</p>
+                                        </div>
+                                        <!-- Form Group (location)-->
+                                        <div class="col-md-6">
+                                            <label class="small mb-1 text-success" for="inputLocation">Phone Number</label>
+                                            <p class="form-control">{{client.personal_contact}}</p>
+                                        </div>
+                                    </div>
+                                    <!-- update form button-->
+                                    <a href="{% url 'edit_personalinfo' client.id %}"><button class="btn btn-primary" type="button">Edit</button></a>
+
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-3">
+                          <!-- Profile picture card-->
+                          <div class="card mb-4 mb-xl-0">
+                            <div class="card-header">Company's Logo</div>
+                            <div class="card-body text-center">
+                              <!-- Profile picture image-->
+                              <img class="img-account-profile rounded-circle mb-2" src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                              <!-- Profile picture help block-->
+                              <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
+                              <!-- Profile picture upload button-->
+                              <button class="btn btn-primary" type="button">Upload new image</button>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-xl-9">
+                          <!-- Account details card-->
+                          <div class="card mb-4">
+                            <div class="card-header">Company Information</div>
+                            <div class="card-body">
+                              <div class="row gx-3 mb-1">
+                                <div class="col-md-6">
+                                  <label class="small text-success " for="inputFirstName">Name Of Company</label>
+                                  <p class="form-control" id="inputFirstNameDisplay">{{client.company_name}}</p>
+                                </div>
+                                <div class="col-md-6">
+                                  <label class="small text-success" for="inputLastName">Date Created</label>
+                                  <p class="form-control" id="inputLastName">{{client.date_created}}</p>
+                                </div>
+                              </div>
+                              <!-- Form Row        -->
+                              <div class="row gx-3 mb-1">
+                                <!-- Form Group (organization name)-->
+                                <div class="col-md-6">
+                                  <label class="small mb-1 text-success" for="inputOrgName">Package Taken</label>
+                                  <p class="form-control">{{ client.product_category }}</p>
+                                </div>
+                                <!-- Form Group (location)-->
+                                <div class="col-md-6">
+                                  <label class="small mb-1 text-success" for="inputLocation">Subcription</label>
+                                  <p class="form-control">Monthly</p>
+                                </div>
+                              </div>
+                              <!-- Form Group (email address)-->
+                              <div class="row gx-3 mb-1">
+                                <!-- Form Group (organization name)-->
+                                <div class="col-md-6">
+                                  <label class="small mb-1 text-success" for="inputOrgName">Preffered Contact</label>
+                                  <p class="form-control">{{client.company_contact}}</p>
+                                </div>
+                                <!-- Form Group (location)-->
+                                <div class="col-md-6">
+                                  <label class="small mb-1 text-success" for="inputLocation"> Contact</label>
+                                  <p class="form-control">{{client.company_contact}}</p>
+                                </div>
+                              </div>
+                              <div class="row gx-3 mb-1">
+                                <!-- Form Group (organization name)-->
+                                <div class="col-md-6">
+                                  <label class="small mb-1 text-success" for="inputOrgName">Location</label>
+                                  <p class="form-control">{{client.location}}</p>
+                                </div>
+                                <!-- Form Group (location)-->
+                                <div class="col-md-6">
+                                  <label class="small mb-1 text-success" for="inputLocation">Mailing Address</label>
+                                  <p class="form-control">{{client.address}}</p>
+                                </div>
+                              </div>
+                              <div class="row gx-3 mb-1">
+                                <!-- Form Group (organization name)-->
+                                <div class="col-md-6">
+                                  <label class="small mb-1 text-success" for="inputOrgName">Website</label>
+                                  <p class="form-control">{{client.company_website}}</p>
+                                </div>
+                                <!-- Form Group (location)-->
+                                <div class="col-md-6">
+                                  <label class="small mb-1 text-success" for="inputLocation">Email Address</label>
+                                  <p class="form-control">{{client.email}}</p>
+                                </div>
+                              </div>
+                              <!-- update form button-->
+                              <a href="{% url 'edit_companyinfo' client.id %}"><button class="btn btn-primary" type="button">Edit</button></a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                  
+        </div>
+                </div>
+            </div>
+        </div>
+{%endblock%}

@@ -1,0 +1,12 @@
+
+
+
+<form action ="{% url 'delete_client' client.id %}" method="POST">
+  {% csrf_token %}
+  <p>Are you sure that you want to delete the Client "{{client}}"?</p>
+  <div>
+    <button type="submit">Yes, Delete</button>
+    <a href="{% url 'Clients'%}">Cancel</a>
+  </div>
+</form>
+

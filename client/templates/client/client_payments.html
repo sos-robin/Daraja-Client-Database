@@ -1,0 +1,92 @@
+
+{% extends 'client/base.html'%}
+
+{% include "client/navbar.html" %}
+
+
+{%block content%}
+
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid px-4">
+            <h1 class="mt-4">All Clients Payments</h1>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item active">Payments</li>
+            </ol>
+            <hr>
+            <div class="d-flex justify-content-end m">
+                <div class="input-group w-25">
+                    <input type="text" class="form-control" placeholder="Search">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                
+             </div>
+             <div class="card-header">
+                <i class="fas fa-money-check-alt"></i> 
+                <!-- Button to create a new customer -->
+                <a class="btn btn-primary btn-sm btn-block" href="">Add Payment</a>
+            </div>
+            <!-- Card header for report generation -->
+            <div class=" d-flex justify-content-end m card-header small">
+                <i class="fas fa-file-alt fa-2x"></i>
+                Generate Report 
+                <!-- Buttons to generate PDF and Excel report -->
+                <a class="btn btn-danger btn-sm btn-block" href="#">Pdf</a>
+                <a class="btn btn-success btn-sm btn-block" href="#">Excel Sheet</a>
+            </div>
+                   
+             <div class="card mb-4">
+                        <div class="card-header">Payments Data</div>
+                        <div class="card-body p-0">
+                            
+                            <!-- Billing history table-->
+                            <div class="table-responsive table-billing-history">
+                                <table class="table mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th class="border-gray-200" scope="col">Transaction ID</th>
+                                            <th class="border-gray-200" scope="col">Company Name</th>
+                                            <th class="border-gray-200" scope="col">Date Of Payment</th>
+                                            <th class="border-gray-200" scope="col">Amount</th>
+                                            <th class="border-gray-200" scope="col">Paid</th>
+                                            <th class="border-gray-200" scope="col">Status</th>
+                                            <th class="border-gray-200" scope="col">Update</th>
+                                            <th class="border-gray-200" scope="col">Remove</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for payment in payments %}
+                                        <tr>
+                                            <td>
+                                                {% if payment %}
+                                                <a class="btn btn-sm btn-primary" href="{% url 'client_pay' payment.client.id %}">View</a>
+                                                {% endif %}
+                                            </td>
+                                            <td>{{ payment.id }}</td>
+                                            <td>{{ payment.client.company_name }}</td>
+                                            <td>{{ payment.date_of_payment }}</td>
+                                            <td>{{ payment.client.product_price }}</td>
+                                            <td>{{ payment.Amount_paid }}</td>
+                                            <td>
+                                                <a class="btn btn-sm btn-success" href="">{{ payment.status }}</a>
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-sm btn-primary" href="">Update</a>
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-sm btn-danger" href="">Remove</a>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                                
+                            </div>
+                        </div>
+                    </div>
+{%endblock%}

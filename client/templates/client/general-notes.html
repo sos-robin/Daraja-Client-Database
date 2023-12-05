@@ -1,0 +1,143 @@
+{% extends 'client/base.html'%}
+
+{% include "client/navbar.html" %}
+
+{%block content%}
+    <style>
+        /* Set the font family and background color for the entire page */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+}
+
+/* Style the header with a dark background color and light text color */
+header {
+  background-color: #343a40;
+  color: #fff;
+}
+
+/* Set the padding for the header */
+header.py-3 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+/* Style the main content container with some top padding */
+main.container {
+  padding-top: 2rem;
+}
+
+/* Style the section headings */
+section h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* Style the unordered lists with Bootstrap's list-group class */
+ul.list-group {
+  margin-bottom: 2rem;
+}
+
+/* Style the list items with some padding */
+li.list-group-item {
+  padding: 1rem;
+}
+
+/* Style the paragraph in the last section */
+section:last-of-type p {
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+
+/* Style the links in the list items */
+li.list-group-item a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+/* Hover effect for the links in the list items */
+li.list-group-item a:hover {
+  color: #0056b3;
+}
+
+/* Style the active link in the list items */
+li.list-group-item.active a {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+    </style>
+</head>
+<body>
+  
+  <div id="layoutSidenav_content">
+    <main>
+        
+        <div class="container-xl px-4 mt-4">
+            <div class="d-flex justify-content-between align-items-center">
+                <h2 class="text-primary">Client Feedback</h2>
+                <ol class="breadcrumb">
+                    <h3><li class="breadcrumb-item active text-success">{{client.company_name}}</li></h3>
+                </ol>
+            </div>
+            
+            <!-- Account page navigation-->
+            <nav class="nav nav-borders ml-auto">
+                <a class="nav-link active ms-0" href="">Clients Information</a>
+                <a class="nav-link" href="{% url 'clients_docs' %}">Clients Documents</a>
+                <a class="nav-link" href="{% url 'General-notes' %}">General Notes</a>
+                <a class="nav-link" href="{% url 'billing' %}">Payment History</a>
+            </nav>
+            <hr class="mt-0 mb-4">
+        </div>
+          <main class="container py-3">
+              <section>
+                  <h2>Customer Service Complaints</h2>
+                  <ul class="list-group">
+                      <li class="list-group-item">Complaint 1</li>
+                      <li class="list-group-item">Complaint 2</li>
+                      <li class="list-group-item">Complaint 3</li>
+                  </ul>
+                  <div class="d-flex justify-content-end mb-3">
+                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Add</button>
+                  </div>
+                  
+              </section>
+              <section>
+                  <h2>Clients Feedback</h2>
+                  <ul class="list-group">
+                      <li class="list-group-item">Feedback 1</li>
+                      <li class="list-group-item">Feedback 2</li>
+                      <li class="list-group-item">Feedback 3</li>
+                  </ul>
+                  <div class="d-flex justify-content-end mb-3">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Add</button>
+                  </div>
+              </section>
+              <section>
+                  <h2>Clients Preferences</h2>
+                  <ul class="list-group">
+                      <li class="list-group-item">Preference 1</li>
+                      <li class="list-group-item">Preference 2</li>
+                      <li class="list-group-item">Preference 3</li>
+                  </ul>
+                  <div class="d-flex justify-content-end mb-3">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Add</button>
+                  </div>
+              </section>
+              <section>
+                  <h2>General Notes</h2>
+                  <ul class="list-group">
+                    <li class="list-group-item">Note 1</li>
+                    <li class="list-group-item">Note 2</li>
+                    <li class="list-group-item">Note 3</li>
+                </ul>
+                <div class="d-flex justify-content-end mb-3">
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Add</button>
+                </div>
+              </section>
+          </main>
+    </main>
+  </div>
+  {%endblock%}

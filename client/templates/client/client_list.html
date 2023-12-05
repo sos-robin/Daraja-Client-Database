@@ -1,0 +1,102 @@
+
+{% extends 'client/base.html'%}
+
+{% include "client/navbar.html" %}
+
+
+{%block content%}
+
+     
+<div id="layoutSidenav_content">
+               <main>
+                {% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+                   <div class="container-fluid px-4">
+                       <h1 class="mt-4">All Clients</h1>
+                       <ol class="breadcrumb mb-4">
+                           <li class="breadcrumb-item active">Clients</li>
+                       </ol>
+                       <div class="row">
+                        <!-- First column for creating new customers -->
+                        <div class="col-xl-4">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <i class="fas fa-user-plus"></i> 
+                                    <!-- Button to create a new customer -->
+                                    <a class="btn btn-primary btn-sm btn-block" href="{% url 'create_client' %}">Create Client</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Second column for search and report generation -->
+                        <div class="col-xl-8">
+                            <div class="card mb-4">
+                                <div class="card-header">   
+                                    <div class="float-right">
+                                        <!-- Form for search bar -->
+                                        <form>
+                                            <div class="input-group">
+                                                <input class="form-control form-control-sm" type="search" placeholder="Search" aria-label="Search">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-outline-success btn-sm" type="submit">Search</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        <!-- Card to display the client list -->
+                        <div class="card mb-4">
+                        <div class="card-header">
+                            <i class="fas fa-table me-1"></i>
+                            Client list
+                            <!-- Table to display client data -->
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Client Name</th>
+                                        <th>Company Name</th>
+                                        <th>Date Created</th>
+                                        <th>Package Category</th>
+                                        <th>Update</th>
+                                        <th>Remove</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Loop through each payment to display client information -->
+                                    {% for client  in clients %}
+                                        <tr>
+                                            <td class="border-gray-200" scope="col">
+                                            {% if client %}
+                                            <a class="btn btn-sm btn-primary" href="{% url 'clients_data' client.id %}">View</a>
+                                            {% endif %}
+                                            </td>
+                                            
+                                            <td class="border-gray-200" scope="col">{{client.name}}</td>
+                                            <td class="border-gray-200" scope="col">{{client.company_name }}</td>
+                                            <td class="border-gray-200" scope="col">{{client.date_created }}</td>
+                                            <td class="border-gray-200" scope="col">{{client.product_category }}</td>
+                                            <td class="border-gray-200" scope="col"><a class="btn btn-sm btn-primary" href="{% url 'update_client' client.id %}">Update</a></td>
+                                            <td class="border-gray-200" scope="col"><a class="btn btn-sm btn-danger"href="{% url 'delete_client' client.id %}">Remove</a></td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                
+                    </div>
+                   </div>
+               </main>
+</div>
+               
+
+{%endblock%} 
+       
